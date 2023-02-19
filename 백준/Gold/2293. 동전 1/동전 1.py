@@ -10,8 +10,7 @@ DP = [0 for _ in range(k+1)]
 DP[0] = 1
 
 for i in coin:
-    for j in range(1, k+1):
-        if j-i >= 0:
+    for j in range(i, k+1):
             DP[j] += DP[j-i]
     
             
