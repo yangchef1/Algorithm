@@ -12,10 +12,9 @@ def backtracking(m, start):
         return
     
     for i in range(start, n):
-        if i not in ans:
-            ans.append(ingrediant[i])
-            backtracking(m, i+1)
-            ans.pop()
+        ans.append(ingrediant[i])
+        backtracking(m, i+1)
+        ans.pop()
 
 
 def absolute(a, b):
