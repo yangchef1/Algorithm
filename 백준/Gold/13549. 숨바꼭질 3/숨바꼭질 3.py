@@ -10,7 +10,7 @@ def bfs(visited, dis, start, dest):
         if node == dest:
             return
         
-        temp = [node * 2, node - 1, node + 1]
+        temp = [node * 2, node - 1, node + 1] # 순서 중요 (달라지면 정답 여부가 바뀜)
         
         for i in temp:
             if i <= 100000 and i >= 0 and not visited[i]:
