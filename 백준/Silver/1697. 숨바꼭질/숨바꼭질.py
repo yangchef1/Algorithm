@@ -1,32 +1,27 @@
-import sys
 from collections import deque
 
-x, y = map(int,sys.stdin.readline().split())
+def bfs(visited, dis, start, dest):
+    need_visited = deque([start])
+    visited[start] = True
+    
+    while need_visited:
+        node = need_visited.popleft()
+        
+        if node == dest:
+            return
+        
+        temp = [node * 2, node - 1, node + 1] 
+        
+        for i in temp:
+            if i <= 100000 and i >= 0 and not visited[i]:
+                visited[i] = True
+                need_visited.append(i)
+                dis[i] = dis[node] + 1                    
 
-if x == y:
-    print(0)
-    exit(0)
+s, d = map(int, input().split())
+visited = [False] * 100001
+dis = [0] * 100001
 
-graph = [0]*400001
+bfs(visited, dis, s, d)
 
-need_visited = deque()
-need_visited.append(x)
-
-while need_visited:
-    if graph[y] != 0:
-        break
-    k = need_visited.popleft()
-    if k+1 <= 400000:
-        if graph[k+1] == 0:
-            graph[k + 1] = graph[k] + 1
-            need_visited.append(k + 1)
-    if k <= 400000:
-        if graph[k-1] == 0:
-            graph[k - 1] = graph[k] + 1
-            need_visited.append(k - 1)
-    if k <= 200000 and k > 0:
-        if graph[k*2] == 0:
-            graph[k * 2] = graph[k] + 1
-            need_visited.append(k * 2)
-
-print(graph[y])
+print(dis[d])
