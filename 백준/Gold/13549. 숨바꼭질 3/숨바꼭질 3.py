@@ -2,11 +2,13 @@ from collections import deque
 
 def bfs(visited, dis, start, dest):
     need_visited = deque([start])
-    dis[start] = 0
     visited[start] = True
     
     while need_visited:
         node = need_visited.popleft()
+        
+        if node == dest:
+            return
         
         temp = [node * 2, node - 1, node + 1]
         
@@ -16,13 +18,13 @@ def bfs(visited, dis, start, dest):
                 need_visited.append(i)
                 
                 if i == node * 2:
-                    dis[i] = min(dis[i], dis[node])
+                    dis[i] = dis[node]
                 else:
-                    dis[i] = min(dis[i], dis[node] + 1)
+                    dis[i] = dis[node] + 1
 
 s, d = map(int, input().split())
 visited = [False] * 100001
-dis = [float('inf')] * 100001
+dis = [0] * 100001
 
 bfs(visited, dis, s, d)
 
