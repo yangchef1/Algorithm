@@ -13,18 +13,19 @@ def bfs(dis, visited, start, dest):
         
         for next_node in next_nodes:
             if next_node >= 0 and next_node <= 100000 and visited[next_node] < 0:
-                dis[next_node] = min(dis[next_node], dis[node] + 1)
+                dis[next_node] = dis[node] + 1
                 visited[next_node] = node
                 need_visited.append(next_node)
                 
 n, k = map(int, input().split())
-dis = [float('inf')] * 100001
+dis = [0] * 100001
 visited = [-1] * 100001
+visited[n] = 0
 dis[n] = 0
 
 bfs(dis, visited, n, k)
-shortest = dis[k]
 
+shortest = dis[k]
 result = [k]
 
 print(shortest)
