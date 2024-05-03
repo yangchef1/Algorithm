@@ -15,7 +15,7 @@ def bfs(stud, visited, start):
         path[node] = cnt
         cnt += 1
 
-        if next_node in path.keys():
+        if next_node in path.keys(): # 사이클 찾는 코드의 실행 시간을 줄이기 위해, list 대신 dict를 사용.
             return cnt - path[next_node]
         
         if not visited[next_node]:
