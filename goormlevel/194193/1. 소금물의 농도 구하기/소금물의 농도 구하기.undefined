@@ -1,0 +1,3 @@
+from math import floor
+n, m = map(int, input().split())
+print ("%.2f"%(floor((7 * n / (n + m)) * 100) / 100))
