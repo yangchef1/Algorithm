@@ -8,8 +8,10 @@ def compare(b_id, u_id):
         if a != '*' and a != b:
             return False
     return True
-        
-def solution(user_id, banned_id):    
+    
+def solution(user_id, banned_id):   
+    answer = 0
+    result = []
     cnt = []
     
     for b_id in banned_id:
@@ -19,11 +21,20 @@ def solution(user_id, banned_id):
                 matched.append(u_id)
         cnt.append(matched)
     
-    cases = product(*cnt)
-    result = set()
+    need_visited = [[[cnt[0][i]], 0] for i in range(len(cnt[0]))]
     
-    for case in cases:
-        if len(set(case)) == len(banned_id):
-            result.add(frozenset(case))
+    while need_visited:
+        path, d = need_visited.pop()
         
-    return len(result)
+        if d >= len(cnt) - 1:
+            sn = set(path)
+            if len(path) == len(banned_id) and sn not in result:
+                answer += 1
+                result.append(sn)
+            continue
+        
+        for i in cnt[d + 1]:
+            if i not in path:
+                need_visited.append([path + [i], d + 1])
+                
+    return answer
