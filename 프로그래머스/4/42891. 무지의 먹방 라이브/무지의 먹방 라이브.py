@@ -13,7 +13,7 @@ def solution(food_times, k):
     cur_time = 0
     cycle = 0
     
-    while foods and cur_time + (len(foods) * (foods[0][0] - cycle)) <= k:
+    while cur_time + ((len(foods) + 1) * (foods[0][0] - cycle)) <= k:
         t, i = heapq.heappop(foods)
         cur_time += ((len(foods) + 1) * (t - cycle))
         cycle = t
